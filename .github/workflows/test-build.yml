@@ -23,4 +23,5 @@ jobs:
           cache: 'yarn'
       - run: yarn
       - run: yarn lint
+      - run: yarn migrate:dev
       - run: yarn build
