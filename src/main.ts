@@ -9,6 +9,7 @@ import {
   NestConfig,
   SwaggerConfig,
 } from './common/configs/config.interface';
+import metadata from './metadata';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -29,6 +30,7 @@ async function bootstrap() {
 
   // Swagger Api
   if (swaggerConfig.enabled) {
+    await SwaggerModule.loadPluginMetadata(metadata);
     const options = new DocumentBuilder()
       .setTitle(swaggerConfig.title)
       .setDescription(swaggerConfig.description)
