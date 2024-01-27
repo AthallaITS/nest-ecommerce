@@ -1,11 +1,10 @@
 import { Logger, Module } from '@nestjs/common';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
-import { PasswordService } from './password.service';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { ConfigService } from '@nestjs/config';
-import { SecurityConfig } from 'src/common/configs/config.interface';
+import { SecurityConfig } from 'src/config/config.interface';
 
 @Module({
   imports: [
@@ -24,6 +23,6 @@ import { SecurityConfig } from 'src/common/configs/config.interface';
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, PasswordService, Logger],
+  providers: [AuthService, Logger],
 })
 export class AuthModule {}

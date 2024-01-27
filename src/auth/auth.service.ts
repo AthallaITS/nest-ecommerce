@@ -13,8 +13,9 @@ import { User } from '@prisma/client';
 import { TokenDto } from './dto/token.dto';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
-import { PasswordService } from './password.service';
 import { LoginDto } from './dto/login.dto';
+import { HashHelper } from '@helpers';
+import { UserResponseDto } from './dto/user-response.dto';
 
 @Injectable()
 export class AuthService {
@@ -22,7 +23,6 @@ export class AuthService {
     private readonly prisma: PrismaService,
     private readonly jwtService: JwtService,
     private readonly configService: ConfigService,
-    private readonly passwordService: PasswordService,
     private readonly logging: Logger,
   ) {}
 
@@ -31,31 +31,30 @@ export class AuthService {
   }
 
   async createUser(payload: CreateUserDto): Promise<User> {
-    const hashedPassword = await this.passwordService.hashPassword(
-      payload.password,
-    );
+    const hashedPassword = await HashHelper.encrypt(payload.password);
     const create = {
       ...payload,
       password: hashedPassword,
       email: payload.email.toLowerCase(),
     };
 
-    return this.prisma.user.create({ data: create });
+    const user = await this.prisma.user.create({ data: create });
+
+    delete user.password;
+
+    return user;
   }
 
-  async login(payload: LoginDto): Promise<TokenDto> {
+  async login({ email, password }: LoginDto): Promise<TokenDto> {
     const user = await this.prisma.user.findUnique({
-      where: { email: payload.email },
+      where: { email },
     });
 
     if (!user) {
-      throw new NotFoundException(`No user found for email: ${payload.email}`);
+      throw new NotFoundException(`No user found for email: ${email}`);
     }
 
-    const passwordValid = this.passwordService.validatePassword(
-      payload.password,
-      user.password,
-    );
+    const passwordValid = await HashHelper.compare(password, user.password);
 
     if (!passwordValid) {
       throw new BadRequestException('Invalid password');
