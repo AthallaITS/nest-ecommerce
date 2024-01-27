@@ -1,51 +1,33 @@
 import { NestFactory, HttpAdapterHost } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { PrismaClientExceptionFilter } from 'nestjs-prisma';
-import { ValidationPipe } from '@nestjs/common';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { ConfigService } from '@nestjs/config';
-import {
-  CorsConfig,
-  NestConfig,
-  SwaggerConfig,
-} from './common/configs/config.interface';
-import metadata from './metadata';
+import { Logger, ValidationPipe } from '@nestjs/common';
+import helmet from 'helmet';
+import compression from 'compression';
+import { SwaggerConfig } from '@config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const { httpAdapter } = app.get(HttpAdapterHost);
 
+  app.enableCors();
+
+  app.use(helmet());
+  app.use(compression());
+
+  app.useGlobalFilters(new PrismaClientExceptionFilter(httpAdapter));
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
       transform: true,
     }),
   );
-  const { httpAdapter } = app.get(HttpAdapterHost);
-  app.useGlobalFilters(new PrismaClientExceptionFilter(httpAdapter));
 
-  const configService = app.get(ConfigService);
-  const nestConfig = configService.get<NestConfig>('nest');
-  const corsConfig = configService.get<CorsConfig>('cors');
-  const swaggerConfig = configService.get<SwaggerConfig>('swagger');
+  SwaggerConfig(app, AppModule.apiVersion);
 
-  // Swagger Api
-  if (swaggerConfig.enabled) {
-    await SwaggerModule.loadPluginMetadata(metadata);
-    const options = new DocumentBuilder()
-      .setTitle(swaggerConfig.title)
-      .setDescription(swaggerConfig.description)
-      .setVersion(swaggerConfig.version)
-      .build();
-    const document = SwaggerModule.createDocument(app, options);
-
-    SwaggerModule.setup(swaggerConfig.path || 'api', app, document);
-  }
-
-  // Cors
-  if (corsConfig.enabled) {
-    app.enableCors();
-  }
-
-  await app.listen(process.env.PORT || nestConfig.port || 3000);
+  await app.listen(AppModule.port || 3000);
+  return AppModule.port || process.env.PORT;
 }
-bootstrap();
+bootstrap().then((port: number) => {
+  Logger.log(`Application running on port: ${port}`, 'Main');
+});

@@ -1,7 +1,7 @@
 import { Logger, Module } from '@nestjs/common';
 import { PrismaModule, QueryInfo, loggingMiddleware } from 'nestjs-prisma';
-import { ConfigModule } from '@nestjs/config';
-import config from './common/configs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import config from './config/config';
 import { AuthModule } from './auth/auth.module';
 
 @Module({
@@ -27,4 +27,11 @@ import { AuthModule } from './auth/auth.module';
     AuthModule,
   ],
 })
-export class AppModule {}
+export class AppModule {
+  static port: number;
+  static apiVersion: string;
+  constructor(private readonly configService: ConfigService) {
+    AppModule.port = this.configService.get('nest.port');
+    AppModule.apiVersion = this.configService.get('nest.apiVersion');
+  }
+}
