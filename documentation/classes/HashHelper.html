@@ -86,7 +86,7 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content injectable">
+               <div class="content class">
                    <div class="content-data">
 
 
@@ -96,9 +96,13 @@
 
 
 
+
+
+
+
 <ol class="breadcrumb">
-  <li class="breadcrumb-item">Injectables</li>
-  <li class="breadcrumb-item" >PasswordService</li>
+  <li class="breadcrumb-item">Classes</li>
+  <li class="breadcrumb-item" >HashHelper</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -122,8 +126,9 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/auth/password.service.ts</code>
+            <code>src/helpers/hash.helper.ts</code>
         </p>
+
 
 
 
@@ -133,6 +138,22 @@
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Static</span>
+                                <a href="#salt" >salt</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -143,10 +164,14 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#hashPassword" >hashPassword</a>
+                                    <span class="modifier">Static</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#compare" >compare</a>
                             </li>
                             <li>
-                                <a href="#validatePassword" >validatePassword</a>
+                                    <span class="modifier">Static</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#encrypt" >encrypt</a>
                             </li>
                         </ul>
                     </td>
@@ -156,71 +181,49 @@
 
 
 
-                    <tr>
-                        <td class="col-md-4">
-                            <h6><b>Accessors</b></h6>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <ul class="index-list">
-                                <li>
-                                    <a href="#bcryptSaltRounds" >bcryptSaltRounds</a>
-                                </li>
-                            </ul>
-                        </td>
-                    </tr>
         </tbody>
     </table>
 </section>
 
-            <section data-compodoc="block-constructor">
-    <h3 id="constructor">Constructor</h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-<code>constructor(configService: <a href="../interfaces/Config.html" target="_self">ConfigService</a>)</code>
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/auth/password.service.ts:14</a></div>
-                            </td>
-                        </tr>
 
+            <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="salt"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Static</span>
+                        <span ><b>salt</b></span>
+                        <a href="#salt"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
                 <tr>
                     <td class="col-md-4">
-                            <div>
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>configService</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../interfaces/Config.html" target="_self" >ConfigService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
                     </td>
                 </tr>
-            </tbody>
-        </table>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>10</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="3" class="link-to-prism">src/helpers/hash.helper.ts:3</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
 </section>
 
             <section data-compodoc="block-methods">
@@ -232,30 +235,35 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="hashPassword"></a>
+                    <a name="compare"></a>
                     <span class="name">
-                        <span ><b>hashPassword</b></span>
-                        <a href="#hashPassword"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier">Static</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>compare</b></span>
+                        <a href="#compare"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>hashPassword(password: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>compare(plain: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, encrypted: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="21"
-                                    class="link-to-prism">src/auth/password.service.ts:21</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="20"
+                                    class="link-to-prism">src/helpers/hash.helper.ts:20</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Compares encrypted and provided string</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -270,74 +278,7 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>password</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="validatePassword"></a>
-                    <span class="name">
-                        <span ><b>validatePassword</b></span>
-                        <a href="#validatePassword"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>validatePassword(password: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, hashedPassword: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="17"
-                                    class="link-to-prism">src/auth/password.service.ts:17</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>password</td>
+                                                <td>plain</td>
                                             <td>
                                                             <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
@@ -349,7 +290,7 @@
 
                                         </tr>
                                         <tr>
-                                                <td>hashedPassword</td>
+                                                <td>encrypted</td>
                                             <td>
                                                             <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
@@ -368,7 +309,81 @@
 
                         </div>
                             <div class="io-description">
+                                <p>Promise<boolean> Returns Boolean if provided string and encrypted are equal</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="encrypt"></a>
+                    <span class="name">
+                            <span class="modifier">Static</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>encrypt</b></span>
+                        <a href="#encrypt"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>encrypt(str: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="10"
+                                    class="link-to-prism">src/helpers/hash.helper.ts:10</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Encrypts plain string</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
                                 
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>str</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;string&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Promise<string> returns encrypted</p>
+
                             </div>
                 </td>
             </tr>
@@ -376,69 +391,40 @@
     </table>
 </section>
 
-            <section data-compodoc="block-accessors">
-    <h3 id="accessors">
-        Accessors
-    </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="bcryptSaltRounds"></a>
-                        <span class="name"><b>bcryptSaltRounds</b><a href="#bcryptSaltRounds"><span class="icon ion-ios-link"></span></a></span>
-                    </td>
-                </tr>
 
-                <tr>
-                    <td class="col-md-4">
-                        <span class="accessor"><b>get</b><code>bcryptSaltRounds()</code></span>
-                    </td>
-                </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/auth/password.service.ts:8</a></div>
-                                </td>
-                            </tr>
 
-            </tbody>
-        </table>
-</section>
+
+
     </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ConfigService } from &#x27;@nestjs/config&#x27;;
-import { hash, compare } from &#x27;bcrypt&#x27;;
-import { SecurityConfig } from &#x27;./../common/configs/config.interface&#x27;;
-import { Injectable } from &#x27;@nestjs/common&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import bcrypt from &#x27;bcrypt&#x27;;
+export class HashHelper {
+  private static salt &#x3D; 10;
 
-@Injectable()
-export class PasswordService {
-  get bcryptSaltRounds(): string | number {
-    const securityConfig &#x3D; this.configService.get&lt;SecurityConfig&gt;(&#x27;security&#x27;);
-    const saltOrRounds &#x3D; securityConfig.bcryptSaltOrRound;
-    return Number.isInteger(Number(saltOrRounds))
-      ? Number(saltOrRounds)
-      : saltOrRounds;
-  }
-  constructor(private readonly configService: ConfigService) {}
-
-  validatePassword(password: string, hashedPassword: string): Promise&lt;boolean&gt; {
-    return compare(password, hashedPassword);
+  /**
+   * Encrypts plain string
+   * @param str
+   * @returns Promise&lt;string&gt; returns encrypted
+   */
+  static async encrypt(str: string): Promise&lt;string&gt; {
+    return await bcrypt.hash(str, this.salt);
   }
 
-  hashPassword(password: string) {
-    return hash(password, this.bcryptSaltRounds);
+  /**
+   * Compares encrypted and provided string
+   * @param plain {string}
+   * @param encrypted {string}
+   * @returns Promise&lt;boolean&gt; Returns Boolean if provided string and encrypted are equal
+   */
+  static async compare(plain: string, encrypted: string): Promise&lt;boolean&gt; {
+    return await bcrypt.compare(plain, encrypted);
   }
 }
 </code></pre>
     </div>
-
 </div>
-
-
-
-
 
 
 
@@ -473,8 +459,8 @@ export class PasswordService {
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'PasswordService.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
+            var COMPODOC_CURRENT_PAGE_URL = 'HashHelper.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

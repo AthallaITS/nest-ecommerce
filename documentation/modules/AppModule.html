@@ -211,8 +211,8 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Logger, Module } from &#x27;@nestjs/common&#x27;;
 import { PrismaModule, QueryInfo, loggingMiddleware } from &#x27;nestjs-prisma&#x27;;
-import { ConfigModule } from &#x27;@nestjs/config&#x27;;
-import config from &#x27;./common/configs/config&#x27;;
+import { ConfigModule, ConfigService } from &#x27;@nestjs/config&#x27;;
+import config from &#x27;./config/config&#x27;;
 import { AuthModule } from &#x27;./auth/auth.module&#x27;;
 
 @Module({
@@ -238,7 +238,14 @@ import { AuthModule } from &#x27;./auth/auth.module&#x27;;
     AuthModule,
   ],
 })
-export class AppModule {}
+export class AppModule {
+  static port: number;
+  static apiVersion: string;
+  constructor(private readonly configService: ConfigService) {
+    AppModule.port &#x3D; this.configService.get(&#x27;nest.port&#x27;);
+    AppModule.apiVersion &#x3D; this.configService.get(&#x27;nest.apiVersion&#x27;);
+  }
+}
 </code></pre>
     </div>
 </div>
