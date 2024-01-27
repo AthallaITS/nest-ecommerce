@@ -1,6 +1,11 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { ApiConsumes, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiConsumes,
+  ApiCreatedResponse,
+  ApiOperation,
+  ApiTags,
+} from '@nestjs/swagger';
 import { CreateUserDto } from './dto/create-user.dto';
 import { LoginDto } from './dto/login.dto';
 import { User } from '@prisma/client';
@@ -17,6 +22,7 @@ export class AuthController {
     return this.authService.createUser(data);
   }
 
+  @ApiOperation({ description: 'User authentication' })
   @ApiConsumes('application/x-www-form-urlencoded')
   @Post('login')
   login(@Body() data: LoginDto) {

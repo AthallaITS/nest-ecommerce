@@ -1,5 +1,5 @@
-import { USER_SELECT } from './../common/configs/constants/user.constants';
-import { SecurityConfig } from './../common/configs/config.interface';
+import { USER_SELECT } from '../common/constants/constants';
+import { SecurityConfig } from '../config/config.interface';
 import {
   BadRequestException,
   Injectable,
@@ -63,13 +63,13 @@ export class AuthService {
     return this.generateTokens({ userId: user.id });
   }
 
-  getUsers() {
+  getUsers(): Promise<UserResponseDto[]> {
     return this.prisma.user.findMany({
       select: USER_SELECT,
     });
   }
 
-  async getUser(id: string) {
+  async getUser(id: string): Promise<UserResponseDto> {
     const user = await this.prisma.user.findUnique({
       where: { id },
       select: USER_SELECT,
