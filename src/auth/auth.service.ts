@@ -1,21 +1,17 @@
-import { USER_SELECT } from '../common/constants/constants';
-import { SecurityConfig } from '../config/config.interface';
+import { HashHelper } from '@helpers';
 import {
   BadRequestException,
   Injectable,
   InternalServerErrorException,
-  Logger,
   NotFoundException,
 } from '@nestjs/common';
-import { PrismaService } from 'nestjs-prisma';
-import { CreateUserDto } from './dto/create-user.dto';
-import { User } from '@prisma/client';
-import { TokenDto } from './dto/token.dto';
-import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
-import { LoginDto } from './dto/login.dto';
-import { HashHelper } from '@helpers';
-import { UserResponseDto } from './dto/user-response.dto';
+import { JwtService } from '@nestjs/jwt';
+import { User } from '@prisma/client';
+import { PrismaService } from 'nestjs-prisma';
+import { USER_SELECT } from '../common/constants/constants';
+import { SecurityConfig } from '../config/config.interface';
+import { CreateUserDto, LoginDto, TokenDto, UserResponseDto } from './dto';
 
 @Injectable()
 export class AuthService {
@@ -23,12 +19,7 @@ export class AuthService {
     private readonly prisma: PrismaService,
     private readonly jwtService: JwtService,
     private readonly configService: ConfigService,
-    private readonly logging: Logger,
   ) {}
-
-  private logger(message: string) {
-    this.logging.log(message, AuthService.name);
-  }
 
   async createUser(payload: CreateUserDto): Promise<User> {
     const hashedPassword = await HashHelper.encrypt(payload.password);
